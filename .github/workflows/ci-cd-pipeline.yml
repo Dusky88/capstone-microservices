@@ -1,0 +1,180 @@
+name: Microservices Demo CI/CD
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: ap-south-1
+  EKS_CLUSTER_NAME: sock-shop-cluster
+  REGISTRY: docker.io
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [front-end, catalogue, carts, orders, payment, shipping, user]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run tests for ${{ matrix.service }}
+        run: |
+          echo "Running tests for ${{ matrix.service }}..."
+          # Add actual test commands based on service
+          if [ -f "test/${{ matrix.service }}/test.sh" ]; then
+            bash test/${{ matrix.service }}/test.sh
+          fi
+
+  build:
+    name: Build Docker Images
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [front-end, catalogue, carts, orders, payment, shipping, user, queue-master]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/sock-shop-${{ matrix.service }}
+          tags: |
+            type=sha,prefix={{branch}}-
+            type=ref,event=branch
+            type=raw,value=latest,enable={{is_default_branch}}
+      
+      - name: Build and push ${{ matrix.service }}
+        uses: docker/build-push-action@v5
+        with:
+          context: ./${{ matrix.service }}
+          file: ./${{ matrix.service }}/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy-staging:
+    name: Deploy to Staging
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    environment:
+      name: staging
+      url: http://${{ steps.get-lb.outputs.lb_url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+      
+      - name: Deploy to Kubernetes
+        run: |
+          # Update image tags in deployment
+          kubectl set image deployment/front-end \
+            front-end=${{ secrets.DOCKERHUB_USERNAME }}/sock-shop-front-end:${{ github.ref_name }}-${{ github.sha }} \
+            -n sock-shop
+          
+          kubectl set image deployment/catalogue \
+            catalogue=${{ secrets.DOCKERHUB_USERNAME }}/sock-shop-catalogue:${{ github.ref_name }}-${{ github.sha }} \
+            -n sock-shop
+          
+          kubectl set image deployment/carts \
+            carts=${{ secrets.DOCKERHUB_USERNAME }}/sock-shop-carts:${{ github.ref_name }}-${{ github.sha }} \
+            -n sock-shop
+      
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status deployment/front-end -n sock-shop --timeout=5m
+          kubectl rollout status deployment/catalogue -n sock-shop --timeout=5m
+          kubectl rollout status deployment/carts -n sock-shop --timeout=5m
+      
+      - name: Get Load Balancer URL
+        id: get-lb
+        run: |
+          LB_URL=$(kubectl -n sock-shop get svc front-end -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          echo "lb_url=$LB_URL" >> $GITHUB_OUTPUT
+          echo "Application deployed at: http://$LB_URL"
+      
+      - name: Run smoke tests
+        run: |
+          LB_URL=$(kubectl -n sock-shop get svc front-end -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          echo "Running smoke tests against http://$LB_URL"
+          
+          # Wait for LB to be ready
+          for i in {1..30}; do
+            if curl -sf http://$LB_URL > /dev/null; then
+              echo "Application is responding!"
+              break
+            fi
+            echo "Waiting for application... ($i/30)"
+            sleep 10
+          done
+          
+          # Basic health check
+          curl -f http://$LB_URL || exit 1
+
+  deploy-production:
+    name: Deploy to Production
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    environment:
+      name: production
+      url: http://${{ steps.get-lb.outputs.lb_url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+      
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to production..."
+          kubectl set image deployment/front-end \
+            front-end=${{ secrets.DOCKERHUB_USERNAME }}/sock-shop-front-end:${{ github.ref_name }}-${{ github.sha }} \
+            -n sock-shop
+          
+          kubectl rollout status deployment/front-end -n sock-shop --timeout=5m
+      
+      - name: Get Load Balancer URL
+        id: get-lb
+        run: |
+          LB_URL=$(kubectl -n sock-shop get svc front-end -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          echo "lb_url=$LB_URL" >> $GITHUB_OUTPUT

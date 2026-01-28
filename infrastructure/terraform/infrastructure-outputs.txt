@@ -1,0 +1,75 @@
+alb_arn = "arn:aws:elasticloadbalancing:ap-south-1:654862558779:loadbalancer/app/dev-sock-shop-alb/4ae80f3167813a14"
+alb_dns_name = "dev-sock-shop-alb-688991108.ap-south-1.elb.amazonaws.com"
+alb_security_group_id = "sg-05fcbbc88dd3fb549"
+alb_zone_id = "ZP97RAFLXTNZK"
+application_url = "http://dev-sock-shop-alb-688991108.ap-south-1.elb.amazonaws.com"
+configure_kubectl = "aws eks update-kubeconfig --region ap-south-1 --name dev-sock-shop-eks"
+deployment_summary = <<EOT
+============================================
+🚀 Sock Shop Infrastructure Deployed (EKS)
+============================================
+    
+Region: ap-south-1
+Environment: dev
+    
+📦 VPC:
+  - VPC ID: vpc-06c7176770b553e82
+  - CIDR: 10.0.0.0/16
+  - Public Subnets: 2
+  - Private Subnets: 2
+    
+☸️  EKS Cluster:
+  - Name: dev-sock-shop-eks
+  - Endpoint: https://CB262993DA9C22B245F12002B5B3AB96.gr7.ap-south-1.eks.amazonaws.com
+  - Node Group: dev-sock-shop-eks:dev-sock-shop-eks-nodes
+    
+🗄️  RDS Database:
+  - Endpoint: dev-sock-shop-db.chiqs0aw8tdd.ap-south-1.rds.amazonaws.com:3306
+  - Database: sockshop
+  - Engine: mysql 8.0
+    
+🌐 Load Balancer:
+  - DNS: dev-sock-shop-alb-688991108.ap-south-1.elb.amazonaws.com
+  - Application URL: http://dev-sock-shop-alb-688991108.ap-south-1.elb.amazonaws.com
+    
+============================================
+📝 Next Steps:
+1. Configure kubectl:
+   aws eks update-kubeconfig --region ap-south-1 --name dev-sock-shop-eks
+    
+2. Verify nodes:
+   kubectl get nodes
+    
+3. Deploy Sock Shop:
+   kubectl create namespace sock-shop
+   kubectl apply -n sock-shop -f https://github.com/microservices-demo/microservices-demo/blob/master/deploy/kubernetes/complete-demo.yaml?raw=true
+    
+4. Expose service:
+   kubectl -n sock-shop patch svc front-end -p '{"spec":{"type":"LoadBalancer"}}'
+    
+5. Get application URL:
+   kubectl -n sock-shop get svc front-end
+============================================
+
+EOT
+eks_cluster_endpoint = "https://CB262993DA9C22B245F12002B5B3AB96.gr7.ap-south-1.eks.amazonaws.com"
+eks_cluster_id = "dev-sock-shop-eks"
+eks_cluster_name = "dev-sock-shop-eks"
+eks_cluster_security_group_id = "sg-000f37ebbb0e23196"
+eks_node_group_id = "dev-sock-shop-eks:dev-sock-shop-eks-nodes"
+private_subnet_ids = [
+  "subnet-017bd00a51da8b291",
+  "subnet-099042f3aa81fbb9c",
+]
+public_subnet_ids = [
+  "subnet-03abac427c812ee14",
+  "subnet-08dfc798e664add8e",
+]
+rds_address = "dev-sock-shop-db.chiqs0aw8tdd.ap-south-1.rds.amazonaws.com"
+rds_database_name = "sockshop"
+rds_endpoint = "dev-sock-shop-db.chiqs0aw8tdd.ap-south-1.rds.amazonaws.com:3306"
+rds_port = 3306
+rds_security_group_id = "sg-04cbf1c0af76fa4a3"
+rds_username = <sensitive>
+vpc_cidr = "10.0.0.0/16"
+vpc_id = "vpc-06c7176770b553e82"

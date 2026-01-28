@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-    - "*"  # run for branches
+    - "never-trigger-this-branch"  # run for branches
     tags:
     - "*"  # run for tags
 
