@@ -9,7 +9,7 @@ on:
 
 env:
   AWS_REGION: ap-south-1
-  EKS_CLUSTER_NAME: sock-shop-cluster
+  EKS_CLUSTER_NAME: dev-sock-shop-eks
 
 jobs:
   validate:
