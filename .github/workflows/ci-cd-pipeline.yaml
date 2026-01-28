@@ -22,28 +22,27 @@ jobs:
       - name: Validate YAML syntax
         run: |
           echo "Validating Kubernetes manifests..."
-          # Basic YAML validation using Python
-          python3 << 'PYTHON'
-import yaml
-import sys
-
-try:
-    with open('deploy/kubernetes/complete-demo.yaml', 'r') as f:
-        docs = list(yaml.safe_load_all(f))
-    print(f"✅ Successfully parsed {len(docs)} Kubernetes resources")
-    for i, doc in enumerate(docs):
-        if doc:
-            kind = doc.get('kind', 'Unknown')
-            name = doc.get('metadata', {}).get('name', 'Unknown')
-            print(f"  - Resource {i+1}: {kind}/{name}")
-    sys.exit(0)
-except yaml.YAMLError as e:
-    print(f"❌ YAML parsing error: {e}")
-    sys.exit(1)
-except Exception as e:
-    print(f"❌ Error: {e}")
-    sys.exit(1)
-PYTHON
+          python3 -c '
+          import yaml
+          import sys
+          
+          try:
+              with open("deploy/kubernetes/complete-demo.yaml", "r") as f:
+                  docs = list(yaml.safe_load_all(f))
+              print(f"✅ Successfully parsed {len(docs)} Kubernetes resources")
+              for i, doc in enumerate(docs):
+                  if doc:
+                      kind = doc.get("kind", "Unknown")
+                      name = doc.get("metadata", {}).get("name", "Unknown")
+                      print(f"  - Resource {i+1}: {kind}/{name}")
+              sys.exit(0)
+          except yaml.YAMLError as e:
+              print(f"❌ YAML parsing error: {e}")
+              sys.exit(1)
+          except Exception as e:
+              print(f"❌ Error: {e}")
+              sys.exit(1)
+          '
 
   deploy-staging:
     name: Deploy to Staging (EKS)
