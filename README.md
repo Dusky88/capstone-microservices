@@ -27,19 +27,19 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 - [Screenshots](#screenshots)
 - [Lessons Learned](#lessons-learned)
 
-1  Architecture
+#**1  Architecture**
 
 ### System Architecture
 ![Architecture Diagram](documentation/diagrams/architecture.md)
 
-2 Infrastructure Components
+** Infrastructure Components**
 - **Cloud Provider**: AWS (ap-south-1)
 - **Kubernetes**: Amazon EKS cluster with 3 worker nodes
 - **Networking**: Custom VPC with public/private subnets across 2 AZs
 - **Load Balancer**: AWS Elastic Load Balancer
 - **Monitoring**: Prometheus + Grafana stack
 
-3 Application Services
+** Application Services**
 | Service | Description | Database |
 |---------|-------------|----------|
 | front-end | User interface | - |
@@ -51,33 +51,33 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 | user | User management | MongoDB |
 | queue-master | Async task processing | RabbitMQ |
 
-4 Technologies Used
+#**2. Technologies Used**
 
-# Infrastructure & Cloud
+** Infrastructure & Cloud**
 - **Terraform** - Infrastructure as Code
 - **AWS EKS** - Managed Kubernetes
 - **AWS VPC** - Network isolation
 - **AWS ELB** - Load balancing
 
-# Container & Orchestration
+** Container & Orchestration**
 - **Docker** - Containerization
 - **Kubernetes** - Container orchestration
 - **Helm** - Kubernetes package manager
 
-# CI/CD
+** CI/CD**
 - **GitHub Actions** - Automation pipeline
 - **kubectl** - Kubernetes CLI
 
-# Monitoring
+** Monitoring**
 - **Prometheus** - Metrics collection
 - **Grafana** - Visualization
 - **Alertmanager** - Alert management
 
-# Version Control
+** Version Control**
 - **Git** - Source control
 - **GitHub** - Repository hosting
 
-5 Prerequisites
+#**3. Prerequisites**
 
 Before you begin, ensure you have the following installed:
 
@@ -87,13 +87,13 @@ Before you begin, ensure you have the following installed:
 - [Helm](https://helm.sh/documentation/intro/install/) (v3.x)
 - [Git](https://git-scm.com/downloads)
 
-6 AWS Account Requirements
+** AWS Account Requirements**
 - AWS account with appropriate permissions
 - IAM user with EKS, VPC, EC2, and ELB permissions
 - AWS credentials configured locally
 
 
-7 Quick Start
+#**4. Quick Start**
 
 ### 1. Clone the Repository
 ```bash
@@ -125,11 +125,11 @@ kubectl -n sock-shop get svc front-end
 # Access the EXTERNAL-IP in your browser
 ```
 
-## 📚 Detailed Setup
+#**5. 📚 Detailed Setup**
 
 See [SETUP.md](documentation/SETUP.md) for comprehensive setup instructions.
 
-## CI/CD Pipeline
+#**6. CI/CD Pipeline**
 
 ![CI/CD Pipeline](documentation/diagrams/cicd-pipeline.md)
 
@@ -163,7 +163,7 @@ Jobs:
 
 See [CICD.md](documentation/CICD.md) for detailed pipeline documentation.
 
-## 📊 Monitoring
+#**7.📊 Monitoring**
 
 ### Prometheus + Grafana Stack
 
@@ -191,7 +191,7 @@ Password: admin123
 
 See [MONITORING.md](documentation/MONITORING.md) for details.
 
-8 📁 Project Structure
+#**8. 📁 Project Structure**
 ```
 .
 ├── .github/
@@ -219,7 +219,7 @@ See [MONITORING.md](documentation/MONITORING.md) for details.
 └── README.md
 ```
 
-9 📸 Screenshots
+#**9. 📸 Screenshots**
 
 ### Application
 ![Sock Shop Application](documentation/screenshots/application.png)
@@ -230,7 +230,7 @@ See [MONITORING.md](documentation/MONITORING.md) for details.
 ### GitHub Actions
 ![CI/CD Pipeline](documentation/screenshots/github-actions.png)
 
-10 Lessons Learned
+#**10. Lessons Learned**
 
 1. **Infrastructure as Code**: Terraform enables reproducible infrastructure
 2. **GitOps**: Automated deployments improve reliability
@@ -238,7 +238,7 @@ See [MONITORING.md](documentation/MONITORING.md) for details.
 4. **Cloud-Native**: Kubernetes provides powerful orchestration
 5. **Automation**: CI/CD reduces manual errors and deployment time
 
-11 🔧 Troubleshooting
+#**10 🔧 Troubleshooting**
 
 ### Common Issues
 
