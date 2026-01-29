@@ -27,7 +27,7 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 - [Screenshots](#screenshots)
 - [Lessons Learned](#lessons-learned)
 
-1 🏛️ Architecture
+1  Architecture
 
 ### System Architecture
 ![Architecture Diagram](documentation/diagrams/architecture.md)
