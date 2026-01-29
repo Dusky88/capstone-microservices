@@ -233,6 +233,9 @@ See [MONITORING.md](documentation/guides/MONITORING.md) for details.
 ### GitHub Actions
 ![CI/CD Pipeline](documentation/screenshots/github-actions.png)
 
+### Prometheus Targets
+![Prometheus Targets](documentation/screenshots/prometheus-targets.png)
+
 #**10. Lessons Learned**
 
 1. **Infrastructure as Code**: Terraform enables reproducible infrastructure
