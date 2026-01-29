@@ -5,7 +5,7 @@ This project implements a microservices-based e-commerce application (Sock Shop)
 
 ## Architecture Diagram
 
-See [architecture diagram](diagrams/architecture.md) for visual representation.
+See [architecture diagram](documentation/diagrams/architecture.md) for visual representation.
 
 ## Infrastructure Components
 
