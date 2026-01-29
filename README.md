@@ -127,7 +127,7 @@ kubectl -n sock-shop get svc front-end
 
 # **5. 📚 Detailed Setup**
 
-See [SETUP.md](documentation/SETUP.md) for comprehensive setup instructions.
+See [SETUP.md](documentation/guides/SETUP.md) for comprehensive setup instructions.
 
 # **6. CI/CD Pipeline**
 
@@ -161,7 +161,7 @@ Jobs:
   - deploy-production: Main branch deployments
 ```
 
-See [CICD.md](documentation/CICD.md) for detailed pipeline documentation.
+See [CICD.md](documentation/guides/CICD.md) for detailed pipeline documentation.
 
 # **7.📊 Monitoring**
 
@@ -189,7 +189,7 @@ Password: admin123
 - High memory usage (>90% for 5 minutes)
 - Frequent pod restarts
 
-See [MONITORING.md](documentation/MONITORING.md) for details.
+See [MONITORING.md](documentation/guides/MONITORING.md) for details.
 
 # **8. 📁 Project Structure**
 ```
@@ -210,12 +210,14 @@ See [MONITORING.md](documentation/MONITORING.md) for details.
 │       ├── prometheus-alerts.yaml
 │       └── README.md
 ├── documentation/
+
 │   ├── diagrams/                    # Architecture diagrams
 │   ├── screenshots/                 # Dashboard screenshots
-│   ├── ARCHITECTURE.md
-│   ├── SETUP.md
-│   ├── CICD.md
-│   └── MONITORING.md
+|   ├── guides                       # Setup guides
+│   |  ├── ARCHITECTURE.md
+│   |  ├── SETUP.md
+│   |  ├── CICD.md
+│   |  └── MONITORING.md
 └── README.md
 ```
 
