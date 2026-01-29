@@ -4,7 +4,7 @@
 
 A production-grade microservices deployment demonstrating complete DevOps lifecycle implementation with Infrastructure as Code, CI/CD automation, container orchestration, and comprehensive monitoring.
 
-## 🏗️ Project Overview
+## Project Overview
 
 This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](https://microservices-demo.github.io/) - a microservices-based e-commerce application. It showcases:
 
@@ -14,7 +14,7 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 - **Monitoring & Observability** using Prometheus and Grafana
 - **Cloud-Native Architecture** on AWS
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Architecture](#architecture)
 - [Technologies Used](#technologies-used)
@@ -93,7 +93,7 @@ Before you begin, ensure you have the following installed:
 - AWS credentials configured locally
 
 
-7 🚀 Quick Start
+7 Quick Start
 
 ### 1. Clone the Repository
 ```bash
@@ -129,7 +129,7 @@ kubectl -n sock-shop get svc front-end
 
 See [SETUP.md](docs/SETUP.md) for comprehensive setup instructions.
 
-## 🔄 CI/CD Pipeline
+## CI/CD Pipeline
 
 ![CI/CD Pipeline](docs/diagrams/cicd-pipeline.md)
 
@@ -230,7 +230,7 @@ See [MONITORING.md](docs/MONITORING.md) for details.
 ### GitHub Actions
 ![CI/CD Pipeline](docs/screenshots/github-actions.png)
 
-10 🎓 Lessons Learned
+10 Lessons Learned
 
 1. **Infrastructure as Code**: Terraform enables reproducible infrastructure
 2. **GitOps**: Automated deployments improve reliability
@@ -277,21 +277,21 @@ kubectl describe svc front-end -n sock-shop
 # Check AWS ELB console for errors
 ```
                                                                                                          
-## 🤝 Contributing
+## Contributing
 
 This is a capstone project, but suggestions are welcome!
 
-## 📄 License
+## License
 
 This project uses the [Weaveworks Sock Shop](https://github.com/microservices-demo/microservices-demo) demo application, which is licensed under Apache 2.0.
 
-## 👤 Author
+## Author
 
 **Your Name**
 - GitHub: [@Dusky88](https://github.com/Dusky88)
 - LinkedIn: [Aayush Basnet](www.linkedin.com/in/aayush-basnet-30b874244)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Weaveworks Sock Shop](https://microservices-demo.github.io/)
 - [Prometheus Community](https://prometheus.io/)
