@@ -227,7 +227,8 @@ See [MONITORING.md](documentation/guides/MONITORING.md) for details.
 ![Sock Shop Application](documentation/screenshots/application.png)
 
 ### Grafana Dashboard
-![Grafana Dashboard](documentation/screenshots/grafana-dashboard.png)
+![Grafana Dashboard](documentation/screenshots/Grafanadashboard.png)
+![Grafana Dashboard](documentation/screenshots/PodsDashboard.png)
 
 ### GitHub Actions
 ![CI/CD Pipeline](documentation/screenshots/github-actions.png)
