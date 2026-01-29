@@ -27,7 +27,7 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 - [Screenshots](#screenshots)
 - [Lessons Learned](#lessons-learned)
 
-#**1  Architecture**
+# **1  Architecture**
 
 ### System Architecture
 ![Architecture Diagram](documentation/diagrams/architecture.md)
@@ -51,7 +51,7 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 | user | User management | MongoDB |
 | queue-master | Async task processing | RabbitMQ |
 
-#**2. Technologies Used**
+# **2. Technologies Used**
 
 ** Infrastructure & Cloud**
 - **Terraform** - Infrastructure as Code
@@ -77,7 +77,7 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 - **Git** - Source control
 - **GitHub** - Repository hosting
 
-#**3. Prerequisites**
+# **3. Prerequisites**
 
 Before you begin, ensure you have the following installed:
 
@@ -93,7 +93,7 @@ Before you begin, ensure you have the following installed:
 - AWS credentials configured locally
 
 
-#**4. Quick Start**
+# **4. Quick Start**
 
 ### 1. Clone the Repository
 ```bash
@@ -125,11 +125,11 @@ kubectl -n sock-shop get svc front-end
 # Access the EXTERNAL-IP in your browser
 ```
 
-#**5. 📚 Detailed Setup**
+# **5. 📚 Detailed Setup**
 
 See [SETUP.md](documentation/SETUP.md) for comprehensive setup instructions.
 
-#**6. CI/CD Pipeline**
+# **6. CI/CD Pipeline**
 
 ![CI/CD Pipeline](documentation/diagrams/cicd-pipeline.md)
 
@@ -163,7 +163,7 @@ Jobs:
 
 See [CICD.md](documentation/CICD.md) for detailed pipeline documentation.
 
-#**7.📊 Monitoring**
+# **7.📊 Monitoring**
 
 ### Prometheus + Grafana Stack
 
@@ -191,7 +191,7 @@ Password: admin123
 
 See [MONITORING.md](documentation/MONITORING.md) for details.
 
-#**8. 📁 Project Structure**
+# **8. 📁 Project Structure**
 ```
 .
 ├── .github/
@@ -219,7 +219,7 @@ See [MONITORING.md](documentation/MONITORING.md) for details.
 └── README.md
 ```
 
-#**9. 📸 Screenshots**
+# **9. 📸 Screenshots**
 
 ### Application
 ![Sock Shop Application](documentation/screenshots/application.png)
@@ -238,7 +238,7 @@ See [MONITORING.md](documentation/MONITORING.md) for details.
 4. **Cloud-Native**: Kubernetes provides powerful orchestration
 5. **Automation**: CI/CD reduces manual errors and deployment time
 
-#**10 🔧 Troubleshooting**
+# **10 🔧 Troubleshooting**
 
 ### Common Issues
 
