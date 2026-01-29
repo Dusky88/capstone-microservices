@@ -1,6 +1,6 @@
 # Sock Shop Microservices - DevOps Capstone Project
 
-[![CI/CD Pipeline](https://github.com/Dusky88/capstone-microservices/blob/main/.github/workflows/ci-cd-pipeline.yaml)
+CI/CD Pipeline (https://github.com/Dusky88/capstone-microservices/blob/main/.github/workflows/ci-cd-pipeline.yaml)
 
 A production-grade microservices deployment demonstrating complete DevOps lifecycle implementation with Infrastructure as Code, CI/CD automation, container orchestration, and comprehensive monitoring.
 
