@@ -26,6 +26,7 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 - [Project Structure](#project-structure)
 - [Screenshots](#screenshots)
 - [Lessons Learned](#lessons-learned)
+- [Troubleshooting](#troubleshooting)
 
 # **1.  Architecture**
 
@@ -236,7 +237,7 @@ See [MONITORING.md](documentation/guides/MONITORING.md) for details.
 ### Prometheus Targets
 ![Prometheus Targets](documentation/screenshots/prometheus-targets.png)
 
-#**10. Lessons Learned**
+# **10. Lessons Learned**
 
 1. **Infrastructure as Code**: Terraform enables reproducible infrastructure
 2. **GitOps**: Automated deployments improve reliability
@@ -244,7 +245,7 @@ See [MONITORING.md](documentation/guides/MONITORING.md) for details.
 4. **Cloud-Native**: Kubernetes provides powerful orchestration
 5. **Automation**: CI/CD reduces manual errors and deployment time
 
-# **10 🔧 Troubleshooting**
+# **11. 🔧 Troubleshooting**
 
 ### Common Issues
 
