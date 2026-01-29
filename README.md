@@ -30,7 +30,7 @@ This project implements a full DevOps pipeline for the [Weaveworks Sock Shop](ht
 1 🏛️ Architecture
 
 ### System Architecture
-![Architecture Diagram](docs/diagrams/architecture.md)
+![Architecture Diagram](documentation/diagrams/architecture.md)
 
 2 Infrastructure Components
 - **Cloud Provider**: AWS (ap-south-1)
@@ -83,8 +83,8 @@ Before you begin, ensure you have the following installed:
 
 - [AWS CLI](https://aws.amazon.com/cli/) (v2.x)
 - [Terraform](https://www.terraform.io/downloads) (v1.0+)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/) (v1.29+)
-- [Helm](https://helm.sh/docs/intro/install/) (v3.x)
+- [kubectl](https://kubernetes.io/documentation/tasks/tools/) (v1.29+)
+- [Helm](https://helm.sh/documentation/intro/install/) (v3.x)
 - [Git](https://git-scm.com/downloads)
 
 6 AWS Account Requirements
@@ -127,11 +127,11 @@ kubectl -n sock-shop get svc front-end
 
 ## 📚 Detailed Setup
 
-See [SETUP.md](docs/SETUP.md) for comprehensive setup instructions.
+See [SETUP.md](documentation/SETUP.md) for comprehensive setup instructions.
 
 ## 🔄 CI/CD Pipeline
 
-![CI/CD Pipeline](docs/diagrams/cicd-pipeline.md)
+![CI/CD Pipeline](documentation/diagrams/cicd-pipeline.md)
 
 ### Pipeline Workflow
 
@@ -161,7 +161,7 @@ Jobs:
   - deploy-production: Main branch deployments
 ```
 
-See [CICD.md](docs/CICD.md) for detailed pipeline documentation.
+See [CICD.md](documentation/CICD.md) for detailed pipeline documentation.
 
 ## 📊 Monitoring
 
@@ -189,7 +189,7 @@ Password: admin123
 - High memory usage (>90% for 5 minutes)
 - Frequent pod restarts
 
-See [MONITORING.md](docs/MONITORING.md) for details.
+See [MONITORING.md](documentation/MONITORING.md) for details.
 
 8 📁 Project Structure
 ```
@@ -209,7 +209,7 @@ See [MONITORING.md](docs/MONITORING.md) for details.
 │   └── monitoring/                  # Monitoring configuration
 │       ├── prometheus-alerts.yaml
 │       └── README.md
-├── docs/
+├── documentation/
 │   ├── diagrams/                    # Architecture diagrams
 │   ├── screenshots/                 # Dashboard screenshots
 │   ├── ARCHITECTURE.md
@@ -222,13 +222,13 @@ See [MONITORING.md](docs/MONITORING.md) for details.
 9 📸 Screenshots
 
 ### Application
-![Sock Shop Application](docs/screenshots/application.png)
+![Sock Shop Application](documentation/screenshots/application.png)
 
 ### Grafana Dashboard
-![Grafana Dashboard](docs/screenshots/grafana-dashboard.png)
+![Grafana Dashboard](documentation/screenshots/grafana-dashboard.png)
 
 ### GitHub Actions
-![CI/CD Pipeline](docs/screenshots/github-actions.png)
+![CI/CD Pipeline](documentation/screenshots/github-actions.png)
 
 10 🎓 Lessons Learned
 
